@@ -1,0 +1,30 @@
+{
+  "name": "libraryrestapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "run": "node dist/main.js",
+    "build-run": "npm run build && npm run run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "]"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^18.7.11",
+    "@types/sqlite3": "^3.1.8"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "connect-sqlite3": "^0.9.13",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "sqlite3": "^5.0.11"
+  }
+}
