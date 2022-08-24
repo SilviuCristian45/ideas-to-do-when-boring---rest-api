@@ -11,14 +11,13 @@ export class Api {
     app: any;
     port: number;
     service: Service
-    database: Database
+    
 
     constructor() {
         this.app = express()
         this.port = 3000    
         this.configureApp()
         this.service = new Service()
-        this.database = new Database()
     }
 
     private configureApp() {
@@ -42,7 +41,7 @@ export class Api {
         })
 
         this.app.get('/activities', (req: any, res: any) => {
-            this.database.selectFromTable('activities').then( activities => {
+            this.service.database.selectFromTable('activities').then( activities => {
                 res.json(activities)
             }).catch(err => {
                 logger.error(err)
@@ -52,7 +51,7 @@ export class Api {
 
         this.app.post('/placeActivity', (req: any, res: any) => {
             const newActivity = cherryPick(req.body)
-            this.database.insertInTable('activities', newActivity).then( () => {
+            this.service.database.insertInTable('activities', newActivity).then( () => {
                 res.json(newActivity)
             }).catch(err => {
                 logger.error(err)
@@ -62,12 +61,21 @@ export class Api {
 
         this.app.post('/placeRandomActivity', (req: any, res: any) => {
             this.service.getRandomActivity().then( activity => {
-                this.database.insertInTable('activities', activity).then( () => {
+                this.service.database.insertInTable('activities', activity).then( () => {
                     res.json(activity)
                 }).catch(err => {
                     logger.error(err)
                     res.status(404)
                 })
+            })
+        })
+
+        this.app.get('/activities/:type', (req: any, res:any) => {
+            this.service.getActivitiesByType(req.params.type).then( activities => 
+                res.json(activities)
+            ).catch( (error) => {
+                logger.error(error)
+                res.status(404)
             })
         })
 
