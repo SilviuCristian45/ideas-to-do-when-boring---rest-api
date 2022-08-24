@@ -2,6 +2,8 @@ import express from "express";
 import { Database } from "../Db/db"
 import { Activity, cherryPick } from "../Model/Activity";
 import { Service } from "../Service/ActivityHandler";
+import {logger} from '../Logger/loggerActivity'
+import { AnyARecord } from "dns";
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 
@@ -34,6 +36,7 @@ export class Api {
             this.service.getRandomActivity().then( (activity: Activity) => {
                 res.json(activity)
             }).catch(err => {
+                logger.error(err)
                 res.status(404)
             })
         })
@@ -42,7 +45,7 @@ export class Api {
             this.database.selectFromTable('activities').then( activities => {
                 res.json(activities)
             }).catch(err => {
-              
+                logger.error(err)
                 res.status(404)
             })
         })
@@ -52,7 +55,7 @@ export class Api {
             this.database.insertInTable('activities', newActivity).then( () => {
                 res.json(newActivity)
             }).catch(err => {
-                console.log(err)
+                logger.error(err)
                 res.status(404)
             })
         })
@@ -62,7 +65,7 @@ export class Api {
                 this.database.insertInTable('activities', activity).then( () => {
                     res.json(activity)
                 }).catch(err => {
-                    console.log(err)
+                    logger.error(err)
                     res.status(404)
                 })
             })

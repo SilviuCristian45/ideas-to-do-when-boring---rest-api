@@ -25,6 +25,8 @@
     "connect-sqlite3": "^0.9.13",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
-    "sqlite3": "^5.0.11"
+    "sqlite3": "^5.0.11",
+    "tslog": "^3.3.4",
+    "typescript-logging-category-style": "^2.0.2"
   }
 }
