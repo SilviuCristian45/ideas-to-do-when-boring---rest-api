@@ -52,7 +52,19 @@ export class Api {
             this.database.insertInTable('activities', newActivity).then( () => {
                 res.json(newActivity)
             }).catch(err => {
+                console.log(err)
                 res.status(404)
+            })
+        })
+
+        this.app.post('/placeRandomActivity', (req: any, res: any) => {
+            this.service.getRandomActivity().then( activity => {
+                this.database.insertInTable('activities', activity).then( () => {
+                    res.json(activity)
+                }).catch(err => {
+                    console.log(err)
+                    res.status(404)
+                })
             })
         })
 
