@@ -1,5 +1,5 @@
 # ideas-to-do-when-boring---rest-api
-
+!! Check develop branch, it is the most up to date branch in this repo. </br>
 Endpoints:
 
 1. http://localhost:3000/activity - GET - returns a random activity
